@@ -75,7 +75,6 @@ module.exports = function (opt) {
 
         extQuery.execWithin = function (where, fn) {
             var query = self.toQuery(); // {text, params}
-            console.log(query);
             if (!fn)
                 return where.query(query.text, query.values);
             else

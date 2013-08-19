@@ -75,6 +75,7 @@ module.exports = function (opt) {
 
         extQuery.execWithin = function (where, fn) {
             var query = self.toQuery(); // {text, params}
+            console.log(query);
             if (!fn)
                 return where.query(query.text, query.values);
             else
@@ -84,7 +85,7 @@ module.exports = function (opt) {
                         err.message = 'SQL' + err.message + '\n' + query.text 
                         + '\n' + query.values;
                     }
-                    fn(err, res && res.rows ? res.rows.map(normalizer) : null);
+                    fn(err, res && res.rows && res.rows.length ? res.rows.map(normalizer) : res.rows);
                 });
         };
 

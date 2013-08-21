@@ -79,12 +79,14 @@ module.exports = function (opt) {
                 return where.query(query.text, query.values);
             else
                 return where.query(query.text, query.values, function (err, res) {
+                    var rows;
                     if (err) {
                         err = new Error(err);
                         err.message = 'SQL' + err.message + '\n' + query.text 
                         + '\n' + query.values;
                     }
-                    fn(err, res && res.rows && res.rows.length ? res.rows.map(normalizer) : res.rows);
+                    rows = res?res.rows:null;
+                    fn(err, rows && rows.length ? res.rows.map(normalizer) : rows);
                 });
         };
 

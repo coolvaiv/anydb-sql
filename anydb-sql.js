@@ -184,6 +184,8 @@ module.exports = function (opt) {
 
     self.begin = pool.begin.bind(pool);
     self.query = pool.query.bind(pool);
+    self.acquire = pool.acquire.bind(pool);
+    self.release = pool.release.bind(pool);
 
 
     self.allOf = function() {

@@ -205,7 +205,7 @@ module.exports = function (opt) {
 
 var normalizer = module.exports.normalizer = function normalizer(row) {
     var res = {};
-    for (var key in row) {
+    Object.keys(row).forEach(function(key) {
         var path = key.split('.'), plen = path.length;
         for (var k = 0, obj = res; k < plen - 1; ++k) {
             var item = path[k];
@@ -214,7 +214,7 @@ var normalizer = module.exports.normalizer = function normalizer(row) {
         }
         var item = path[plen - 1];
         obj[item] = row[key];
-    }
+    });
     return res;
 }
 

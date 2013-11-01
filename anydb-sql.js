@@ -175,6 +175,8 @@ module.exports = function (opt) {
         return t;
     };
 
+    self.functions = sql.functions;
+
 
     self.close = function() {
         if (pool) 

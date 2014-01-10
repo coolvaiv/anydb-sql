@@ -1,28 +1,21 @@
 {
   "name": "anydb-sql",
-  "version": "0.6.6",
-  "description": "Minimal ORM for mysql, postgresql and sqlite with complete arbitrary SQL query support (based on brianc's query builder sql)",
+  "version": "0.1.17",
+  "description": "anydb-sql combines node-anydb and node-sql",
   "main": "anydb-sql.js",
   "scripts": {
     "test": "tap test/index.js"
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/qzaidi/anydb-sql.git"
+    "url": "git://github.com/doxout/anydb-sql.git"
   },
   "author": "spion",
   "license": "MIT",
   "readmeFilename": "README.md",
   "keywords": [
-    "any",
-    "db",
-    "sql",
-    "orm",
-    "postgres",
-    "pg",
-    "postgresql",
-    "mysql",
-    "sqlite"
+    "anydb",
+    "sql"
   ],
   "bugs": {
     "url": "https://github.com/doxout/anydb-sql/issues"
@@ -31,11 +24,8 @@
     "test": "test"
   },
   "dependencies": {
-    "bluebird": "~0.11.5-0",
-    "any-db": "~1.0.3",
-    "any-db-postgres": "~1.0.2",
-    "any-db-mysql": "~1.0.1",
-    "sql": "~0.34.0"
+    "sql": "~0.22.0",
+    "any-db": "~0.5.1"
   },
   "devDependencies": {
     "tap": "~0.4.3",

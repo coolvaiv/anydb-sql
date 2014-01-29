@@ -3,6 +3,7 @@ var anyDB = require('any-db');
 
 var sql = require('sql');
 var url = require('url');
+var debug = require('debug')('anydb');
 
 var EventEmitter = require('events').EventEmitter;
 
@@ -75,6 +76,7 @@ module.exports = function (opt) {
 
         extQuery.execWithin = function (where, fn) {
             var query = self.toQuery(); // {text, params}
+            debug(query.text,query.values);
             if (!fn)
                 return where.query(query.text, query.values);
             else

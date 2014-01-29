@@ -25,7 +25,8 @@
   },
   "dependencies": {
     "sql": "~0.22.0",
-    "any-db": "~0.5.1"
+    "any-db": "~0.5.1",
+    "debug": "*"
   },
   "devDependencies": {
     "tap": "~0.4.3",

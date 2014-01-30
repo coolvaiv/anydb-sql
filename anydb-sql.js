@@ -37,6 +37,7 @@ module.exports = function (opt) {
             }
         }
         else {
+            debug('creating pool with ' + opt.connections.max + ' connections.');
             pool = anyDB.createPool(opt.url, opt.connections);
         }
     }
@@ -81,6 +82,7 @@ module.exports = function (opt) {
                 return where.query(query.text, query.values);
             else
                 return where.query(query.text, query.values, function (err, res) {
+                    debug('responded to ' + query.text);
                     var rows;
                     if (err) {
                         err = new Error(err);

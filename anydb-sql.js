@@ -61,7 +61,7 @@ module.exports = function (opt) {
         }
         pool._mainpool = true;
         pool = wrapQuery(pool);
-    }
+    };
 
     db.open();
     db.models = {};
@@ -74,7 +74,7 @@ module.exports = function (opt) {
         queryMethods.forEach(function (key) {
             extTable[key] = function () {
                 return extendedQuery(table[key].apply(table, arguments));
-            }
+            };
         });
 
 
@@ -154,7 +154,7 @@ module.exports = function (opt) {
             return q.then(function(rows) {
                return rows && rows.length ? rows[0] : null;
             }).nodeify(fn);
-        }
+        };
 
         extQuery.get = extQuery.getWithin.bind(extQuery, pool);
 
@@ -163,7 +163,7 @@ module.exports = function (opt) {
                 var q = query[key].apply(query, arguments);
                 if (q.__extQuery) return q;
                 return extendedQuery(q);
-            }
+            };
         });
 
         extQuery.selectDeep = function() {
@@ -190,14 +190,23 @@ module.exports = function (opt) {
             pool.close.apply(pool, arguments);
         pool = null;
     };
-
-    db.acquire = pool.acquire.bind(pool);
-    db.release = pool.release.bind(pool);
+    
+    
+    
+    db.acquire = function (){
+      debug('pool',pool);
+      debug('pool acquire',pool.acquire);
+     return pool.acquire?pool.acquire.bind(pool):undefined;
+    };
+    
+    db.release = function (){
+      return pool.release?pool.release.bind(pool):undefined;
+    };
 
     db.begin = function() {
         var tx = pool.begin();
         return wrapTransaction(tx);
-    }
+    };
 
     db.transaction = function(f) {
         return P.try(function() {
@@ -209,11 +218,11 @@ module.exports = function (opt) {
                 return tx.rollbackAsync().thenThrow(err);
             });
         });
-    }
+    };
 
     db.query = function() {
         return pool.query.apply(pool, arguments);
-    }
+    };
 
 
     function columnName(c) {
@@ -301,7 +310,7 @@ module.exports = function (opt) {
         tx.__transaction = true;
         tx.logQueries = function(enabled) {
             tx._logQueries = enabled;
-        }
+        };
         return wrapQuery(tx);
     }
 
@@ -320,7 +329,7 @@ var normalizer = module.exports.normalizer = function normalizer(row) {
         obj[item] = row[key];
     });
     return res;
-}
+};
     db.test = {
         end:  function() {
             if (pool.rollback) {
@@ -332,7 +341,7 @@ var normalizer = module.exports.normalizer = function normalizer(row) {
             if (!pool.rollback) {
                 oldpool = pool;
                 pool = db.begin();
-                pool.begin = pool.savepoint
+                pool.begin = pool.savepoint;
             }
         }
     };

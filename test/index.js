@@ -8,6 +8,8 @@ var path = require('path');
 
 var util = require('util');
 
+var debug = require('debug')('anydb');
+
 var db = anydbsql({
   url: 'sqlite3://',
   connections: 1
@@ -34,6 +36,10 @@ var user = db.define({
 });
 
 
+debug('db acquire',db.acquire);
+
+debug('db release',db.release);
+
 test('anydb-sql', function(t) {
 
   db.query('create table users (id integer primary key, name);\n'
@@ -50,7 +56,7 @@ test('anydb-sql', function(t) {
 
     t.test('where get', function(t) {
       user.where({id: 1}).get(function(err, user) {
-        t.deepEquals(user, {id: 1, name: 'test'})
+        t.deepEquals(user, {id: 1, name: 'test'});
         t.end();
       });
     });
@@ -69,7 +75,7 @@ test('anydb-sql', function(t) {
             .then(function() {
                 return user.insert({id: 3, name: 'test3'}).execWithin(tx);
             }).then(function() {
-                return user.where({id: 2}).getWithin(tx)
+                return user.where({id: 2}).getWithin(tx);
             }).then(function(res) {
                 t.ok(res, 'getWithin transaction should work');
                 t.end();
@@ -78,7 +84,7 @@ test('anydb-sql', function(t) {
         }).done(null, function(e) {
             t.notOk(e, 'db.transaction should not throw');
             t.end();
-        })
+        });
     });
 
     t.test('failed transaction', function(t) {
@@ -87,7 +93,7 @@ test('anydb-sql', function(t) {
         }).done(null, function(e) {
             t.ok(e, 'db.transaction should fail');
             t.end();
-        })
+        });
     });
 
 
@@ -136,7 +142,7 @@ test('anydb-sql', function(t) {
         try {
             var q = user.from(user.join(user.posts))
                 .selectDeep(user.id, post, user.posts);
-            t.notOk(true, 'should throw, but did not')
+            t.notOk(true, 'should throw, but did not');
             t.end();
         } catch (e) {
             t.ok(true, 'should trow, and did');

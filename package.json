@@ -32,7 +32,7 @@
     "test": "test"
   },
   "dependencies": {
-    "debug": "*"
+    "debug": "*",
     "bluebird": "~1.0.3",
     "any-db": "~1.0.3",
     "any-db-postgres": "~1.0.2",

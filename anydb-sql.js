@@ -191,17 +191,9 @@ module.exports = function (opt) {
         pool = null;
     };
     
+    db.acquire = pool.acquire?pool.acquire.bind(pool):undefined;
     
-    
-    db.acquire = function (){
-      debug('pool',pool);
-      debug('pool acquire',pool.acquire);
-     return pool.acquire?pool.acquire.bind(pool):undefined;
-    };
-    
-    db.release = function (){
-      return pool.release?pool.release.bind(pool):undefined;
-    };
+    db.release = pool.release?pool.release.bind(pool):undefined;
 
     db.begin = function() {
         var tx = pool.begin();

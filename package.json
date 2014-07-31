@@ -35,7 +35,6 @@
     "debug": "*",
     "bluebird": "~1.0.3",
     "any-db": "~1.0.3",
-    "any-db-postgres": "~1.0.2",
     "any-db-mysql": "~1.0.1",
     "sql": "~0.34.0"
   },
